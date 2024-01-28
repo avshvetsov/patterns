@@ -17,10 +17,10 @@ public class VisitorPattern {
         System.out.println("Hello world!");
         //2+2*2
         AST ast = new MathExpression(new IntegerValueNode(2), new SumOperatorNode(), new MathExpression(new IntegerValueNode(2), new MultipleOperatorNode(), new IntegerValueNode(2)));
-        countBackward(ast);
+        computeBackwards(ast);
 
         AST converted = convertAST(ast);
-        countBackward(converted);
+        computeBackwards(converted);
     }
 
     private static AST convertAST(AST ast) {
@@ -60,8 +60,7 @@ public class VisitorPattern {
         });
         return stack.pop();
     }
-
-    private static void countBackward(AST ast) {
+    private static void computeBackwards(AST ast) {
         Stack<Object> stack = new Stack<>();
         ast.accept(new Visitor() {
             @Override
